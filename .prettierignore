@@ -1,0 +1,6 @@
+.vscode
+dist-electron
+node_modules
+public
+videos
+package.json

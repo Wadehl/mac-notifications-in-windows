@@ -1,0 +1,67 @@
+@import "assets/SF-Pro-SC/font.css";
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+body {
+  margin: 0;
+  line-height: normal;
+  font-family: var(--subheadline-regular);
+  overflow: hidden;
+}
+
+:root {
+  /* fonts */
+  --subheadline-regular: "SF Pro SC", "SF Pro Display", "SF Pro Text";
+
+  /* font sizes */
+  --subheadline-regular-size: 0.69rem;
+  --body-regular-size: 0.81rem;
+
+  /* Colors */
+  --materials-ultrathick: #a2a5a7ee;
+
+  --text-primary: rgba(0, 0, 0, 0.85);
+  --fills-tertiary: rgba(0, 0, 0, 0.25);
+
+  /* Gaps */
+  --gap-5xs: 0.5rem;
+  --gap-6xs: 0.44rem;
+  --gap-11xs: 0.13rem;
+
+  /* Paddings */
+  --padding-xs: 0.75rem;
+  --padding-8xs: 0.31rem;
+
+  /* border radiuses */
+  --br-base: 16px;
+  --br-7xs: 6px;
+
+  /* Colors */
+  --materials-controls-title-bar: rgba(250, 250, 250, 0.8);
+  --color-gray-100: rgba(0, 0, 0, 0.2);
+  --color-limegreen: #28c840;
+  --color-goldenrod: #febc2e;
+  --color-tomato: #ff5f57;
+  --materials-controls-sidebar: rgba(246, 246, 246, 0.84);
+
+  /* Paddings */
+  --padding-10xs: 0.19rem;
+  --padding-3xs: 0.63rem;
+  --padding-5xs: 0.5rem;
+
+  /* border radius's */
+  --br-81xl: 100px;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.draggable {
+  cursor: move;
+}
