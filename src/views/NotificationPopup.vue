@@ -22,10 +22,28 @@
             src="@/assets/types/phone.png"
           />
           <img
+            v-else-if="type === 'warning'"
+            class="no-app-icon"
+            alt="warning"
+            src="@/assets/types/warning.png"
+          />
+          <img
+            v-else-if="type === 'success'"
+            class="no-app-icon"
+            alt="success"
+            src="@/assets/types/success.png"
+          />
+          <img
+            v-else-if="type === 'error'"
+            class="no-app-icon"
+            alt="notification"
+            src="@/assets/types/notification.png"
+          />
+          <img
             v-else
             class="no-app-icon"
-            alt="phone"
-            src="@/assets/types/warning.png"
+            alt="notification"
+            src="@/assets/types/notification.png"
           />
         </div>
         <div class="title-description">

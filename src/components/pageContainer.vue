@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar draggable">
+  <div class="navbar draggable" @dblclick="expand">
     <div class="window-controls">
       <div class="close center" @click="close">
         <icon-close :size="6" v-show="controlsHovered" />
@@ -66,7 +66,10 @@ let mouseX: number, mouseY: number;
 
 document.addEventListener('mousedown', (e: any) => {
   // @ts-ignore
-  if (e.target.classList.contains('draggable')) {
+  if (
+    e.target.classList.contains('draggable') ||
+    e.target.classList.contains('v-md-editor__toolbar')
+  ) {
     mouseX = e.clientX;
     mouseY = e.clientY;
     document.addEventListener('mousemove', onMouseMove);
@@ -100,8 +103,11 @@ function onMouseUp() {
   padding: var(--padding-10xs) 4.25rem var(--padding-10xs) 0;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  width: 100%;
   height: 48px;
+  position: fixed;
+  top: 0;
+  z-index: 999;
 
   .window-controls {
     height: 0.75rem;
@@ -165,6 +171,7 @@ function onMouseUp() {
 }
 
 .content-area {
+  margin-top: 48px;
   padding: 20px;
 }
 </style>

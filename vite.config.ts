@@ -4,6 +4,7 @@ import renderer from 'vite-plugin-electron-renderer';
 import vue from '@vitejs/plugin-vue';
 import * as path from 'path';
 import { vitePluginForArco } from '@arco-plugins/vite-vue';
+import prismjs from 'vite-plugin-prismjs';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -31,6 +32,9 @@ export default defineConfig({
         got: { type: 'esm' },
       },
     }),
+    prismjs({
+      languages: ['js', 'ts', 'python', 'json'],
+    }),
   ],
   css: {
     preprocessorOptions: {
@@ -44,5 +48,8 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
+  },
+  optimizeDeps: {
+    include: ['@kangc/v-md-editor/lib/theme/vuepress.js'],
   },
 });

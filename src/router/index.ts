@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import HelloWorld from '@/views/HelloWorld.vue';
 import NotificationPopup from '@/views/NotificationPopup.vue';
+import MarkdownPages from '@/views/MarkdownPages.vue';
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     name: 'notification',
     path: '/notification',
     component: NotificationPopup,
+  },
+  {
+    name: 'markdown-pages',
+    path: '/markdown-pages',
+    component: MarkdownPages,
   },
 ];
 

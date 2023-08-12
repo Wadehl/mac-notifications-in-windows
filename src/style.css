@@ -1,4 +1,5 @@
 @import "assets/SF-Pro-SC/font.css";
+@import "assets/font.css";
 
 ::-webkit-scrollbar {
   width: 0;
@@ -63,5 +64,5 @@ body {
 }
 
 .draggable {
-  cursor: move;
+  /*cursor: move;*/
 }
