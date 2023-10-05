@@ -3,20 +3,18 @@ import type { BrowserWindow } from 'electron';
 import path from 'node:path';
 
 function createTray(win: BrowserWindow, service: any, markdown: BrowserWindow) {
-  const icon = nativeImage.createFromPath(
-    path.join(process.env.PUBLIC, 'vite.svg'),
-  );
+  const icon = nativeImage.createFromPath(path.join(__dirname, 'logo.ico'));
   const tray = new Tray(icon);
 
   const contextMenu = Menu.buildFromTemplate([
-    {
-      label: 'markdown editor👾',
-      type: 'normal',
-      accelerator: process.platform === 'darwin' ? 'Alt+Cmd+M' : 'Alt+Shift+M',
-      click: () => {
-        markdown?.show();
-      },
-    },
+    // {
+    //   label: 'markdown editor👾',
+    //   type: 'normal',
+    //   accelerator: process.platform === 'darwin' ? 'Alt+Cmd+M' : 'Alt+Shift+M',
+    //   click: () => {
+    //     markdown?.show();
+    //   },
+    // },
     {
       label: 'debugger🐝',
       type: 'normal',
@@ -30,6 +28,7 @@ function createTray(win: BrowserWindow, service: any, markdown: BrowserWindow) {
       type: 'normal',
       click: () => {
         win?.destroy();
+        markdown?.destroy();
         tray?.destroy();
         if (process.platform === 'darwin') {
           service?.kill();

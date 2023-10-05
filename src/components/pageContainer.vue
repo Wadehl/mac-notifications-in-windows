@@ -1,24 +1,26 @@
 <template>
-  <div class="navbar draggable" @dblclick="expand">
-    <div class="window-controls">
-      <div class="close center" @click="close">
-        <icon-close :size="6" v-show="controlsHovered" />
+  <template v-if="!props.withSidebar">
+    <div class="navbar draggable" @dblclick="expand">
+      <div class="window-controls">
+        <div class="close center" @click="close">
+          <icon-close :size="6" v-show="controlsHovered" />
+        </div>
+        <div class="minimize center" @click="minimize">
+          <icon-minus :size="6" v-show="controlsHovered" />
+        </div>
+        <div class="zoom center" @click="expand">
+          <icon-shrink :size="6" v-if="isExpanded" v-show="controlsHovered" />
+          <icon-expand :size="6" v-else v-show="controlsHovered" />
+        </div>
       </div>
-      <div class="minimize center" @click="minimize">
-        <icon-minus :size="6" v-show="controlsHovered" />
-      </div>
-      <div class="zoom center" @click="expand">
-        <icon-shrink :size="6" v-if="isExpanded" v-show="controlsHovered" />
-        <icon-expand :size="6" v-else v-show="controlsHovered" />
+      <div class="title-container draggable">
+        <div class="title">{{ title }}</div>
       </div>
     </div>
-    <div class="title-container draggable">
-      <div class="title">{{ title }}</div>
+    <div class="content-area">
+      <slot />
     </div>
-  </div>
-  <div class="content-area">
-    <slot />
-  </div>
+  </template>
 </template>
 
 <script setup lang="ts">
@@ -29,6 +31,10 @@ const props = defineProps({
   title: {
     type: String,
     default: '主页',
+  },
+  withSidebar: {
+    type: Boolean,
+    default: false,
   },
 });
 

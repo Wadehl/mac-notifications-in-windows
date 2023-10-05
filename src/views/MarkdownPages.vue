@@ -9,8 +9,7 @@ const text = ref('');
   <page-container title="Markdown">
     <markdown-editor
       v-model="text"
-      height="80vh"
-      style="min-height: 600px; -webkit-app-region: drag"
+      style="min-height: 800px; -webkit-app-region: drag"
     ></markdown-editor>
   </page-container>
 </template>

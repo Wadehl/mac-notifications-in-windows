@@ -5,6 +5,11 @@ import { ipcRenderer } from 'electron';
 import message from '@/utils/message';
 import axios from 'axios';
 
+import Store from 'electron-store';
+import fs from 'fs';
+
+const store = new Store();
+
 const props = defineProps({
   text: {
     type: String,
@@ -51,6 +56,12 @@ const toolBar = reactive({
 });
 
 onMounted(() => {
+  if (store.get('lastSavePath')) {
+    bindText.value = fs.readFileSync(store.get('lastSavePath') as string, {
+      encoding: 'utf-8',
+    });
+  }
+
   uploadRef?.value.addEventListener('change', (event: any) => {
     const file = event.target.files[0];
     const reader = new FileReader();

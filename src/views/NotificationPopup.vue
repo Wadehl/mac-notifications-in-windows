@@ -1,6 +1,18 @@
 <template>
   <Transition>
-    <div v-show="visible" class="container">
+    <div
+      v-show="visible"
+      class="container"
+      @mouseover="clearTimer"
+      @mouseleave="closePopup"
+    >
+      <div
+        class="close-button"
+        v-show="showClose"
+        @click="closePopupImmediately"
+      >
+        <icon-close />
+      </div>
       <div class="notification-default">
         <div class="app-icon">
           <img
@@ -68,17 +80,49 @@ const route = useRoute();
 
 const visible = ref(false);
 
+// 计时器
+const timer = ref<any>(null);
+const timer2 = ref<any>(null);
+
+// 关闭按钮
+const showClose = ref(false);
+
 onMounted(() => {
   setTimeout(() => {
     visible.value = true;
   }, 100);
-  setTimeout(() => {
+  // closePopup();
+});
+
+const closePopup = () => {
+  showClose.value = false;
+  timer.value = setTimeout(() => {
     visible.value = false;
   }, 1000);
-  setTimeout(() => {
+  timer2.value = setTimeout(() => {
+    if (visible.value) {
+      visible.value = false;
+    }
     ipcRenderer.send('destroyNotificationPopup');
   }, 5000);
-});
+};
+
+const closePopupImmediately = () => {
+  visible.value = false;
+  setTimeout(() => {
+    if (visible.value) {
+      visible.value = false;
+    }
+    ipcRenderer.send('destroyNotificationPopup');
+  }, 0);
+};
+
+const clearTimer = () => {
+  clearTimeout(timer.value);
+  clearTimeout(timer2.value);
+  showClose.value = true;
+  // closePopup();
+};
 
 const customTitle = ref('');
 const customMessage = ref('');
@@ -106,6 +150,15 @@ if (VITE_DEV_SERVER_URL) {
   type.value = query.type as string;
   time.value = query.time as string;
 }
+
+const copy = () => {
+  const el = document.createElement('textarea');
+  el.value = customMessage.value;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+};
 </script>
 <style lang="less" scoped>
 .v-enter-active {
@@ -215,7 +268,7 @@ if (VITE_DEV_SERVER_URL) {
     0px 0px 2px rgba(0, 0, 0, 0.25),
     0px 0px 9px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(30px);
-  width: 21.5rem;
+  width: 344px;
   display: flex;
   flex-direction: row;
   padding: var(--padding-xs);
@@ -227,5 +280,21 @@ if (VITE_DEV_SERVER_URL) {
   font-size: var(--body-regular-size);
   color: var(--text-primary);
   font-family: var(--subheadline-regular);
+}
+
+.close-button {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  border-radius: 50%;
+  background-color: #f5f5f5;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
 }
 </style>

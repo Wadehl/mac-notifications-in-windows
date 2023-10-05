@@ -1,13 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import HelloWorld from '@/views/HelloWorld.vue';
+import DebuggerPage from '@/views/DebuggerPage.vue';
 import NotificationPopup from '@/views/NotificationPopup.vue';
 import MarkdownPages from '@/views/MarkdownPages.vue';
 
 const routes = [
   {
-    path: '/',
-    component: HelloWorld,
-    name: 'HomePage',
+    path: '/debug',
+    component: DebuggerPage,
+    name: 'DebuggerPage',
   },
   {
     name: 'notification',
@@ -16,7 +16,7 @@ const routes = [
   },
   {
     name: 'markdown-pages',
-    path: '/markdown-pages',
+    path: '/',
     component: MarkdownPages,
   },
 ];

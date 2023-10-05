@@ -6,9 +6,14 @@ import dayjs from 'dayjs';
 import path from 'node:path';
 import { VITE_DEV_SERVER_URL } from '../config';
 
+// 持久化
+import Store from 'electron-store';
+
+const store = new Store();
+
 const { renderMyNotificationPopup } = initNotification();
 
-const initMarkdown = () => {
+const initMarkdown = async () => {
   const markdown = new BrowserWindow({
     icon: path.join(process.env.PUBLIC, 'vite.svg'),
     minWidth: 1000,
@@ -25,11 +30,9 @@ const initMarkdown = () => {
   });
 
   if (VITE_DEV_SERVER_URL) {
-    markdown.loadURL(`${VITE_DEV_SERVER_URL}/#/markdown-pages`);
+    await markdown.loadURL(VITE_DEV_SERVER_URL);
   } else {
-    markdown.loadFile(path.join(process.env.DIST, 'index.html'), {
-      hash: 'markdown-pages',
-    });
+    await markdown.loadFile(path.join(process.env.DIST, 'index.html'));
   }
 
   // 开发者工具
@@ -37,6 +40,10 @@ const initMarkdown = () => {
     if (input.key === 'F12') {
       event.preventDefault();
       markdown?.webContents.openDevTools();
+    }
+    if (input.key === 'Ctrl+S') {
+      event.preventDefault();
+      markdown?.webContents.send('saveMarkdown');
     }
   });
 
@@ -73,10 +80,22 @@ const initMarkdown = () => {
   });
 
   const saveMarkdown = async (text: string) => {
-    const path = await dialog.showSaveDialog({
-      defaultPath: 'markdown.md',
-      filters: [{ name: 'Markdown Files', extensions: ['md'] }],
-    });
+    let path = {
+      filePath: '',
+    };
+
+    if (store.get('lastSavePath')) {
+      path.filePath = store.get('lastSavePath') as string;
+    } else {
+      Object.assign(
+        path,
+        await dialog.showSaveDialog({
+          defaultPath: 'markdown.md',
+          filters: [{ name: 'Markdown Files', extensions: ['md'] }],
+        }),
+      );
+      store.set('lastSavePath', path.filePath);
+    }
     try {
       await fs.writeFile(path.filePath as string, text);
       renderMyNotificationPopup({

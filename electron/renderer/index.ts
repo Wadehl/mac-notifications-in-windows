@@ -18,10 +18,13 @@ async function createWindow() {
   });
 
   if (VITE_DEV_SERVER_URL) {
-    await win.loadURL(VITE_DEV_SERVER_URL);
+    // await win.loadURL(VITE_DEV_SERVER_URL);
+    await win.loadURL(`${VITE_DEV_SERVER_URL}/#/debug`);
   } else {
     // win.loadFile('dist/index.html')
-    await win.loadFile(path.join(process.env.DIST, 'index.html'));
+    await win.loadFile(path.join(process.env.DIST, 'index.html'), {
+      hash: 'debug',
+    });
   }
   // 开发者工具
   win.webContents.on('before-input-event', (event, input) => {
@@ -59,7 +62,7 @@ async function createWindow() {
       win?.setPosition(bounds?.x + deltaX, bounds?.y + deltaY);
       throttleTimer = setTimeout(() => {
         throttleTimer = null;
-      }, 5);
+      }, 16);
     }
   });
 
