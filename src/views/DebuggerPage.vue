@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ipcRenderer } from 'electron';
-import { onUnmounted, reactive, ref } from 'vue';
+import { onUnmounted, reactive } from 'vue';
 import axios from 'axios';
 import dayjs from 'dayjs';
 
 import { useSocket } from '@/hooks/useSocket';
 import PageContainer from '../components/pageContainer.vue';
-import MarkdownEditor from '@/components/markdownEditor.vue';
+// import MarkdownEditor from '@/components/markdownEditor.vue';
 
 const formState = reactive({
   title: '',
@@ -15,7 +15,7 @@ const formState = reactive({
 });
 
 const typeOptions = [
-  { label: '信息\n', value: 'message' },
+  { label: '信息', value: 'message' },
   { label: '电话', value: 'phone' },
   { label: '警告', value: 'warning' },
   { label: '微信', value: 'wechat' },
@@ -29,6 +29,7 @@ const showNotificationPopup = (data: any) => {
   ipcRenderer.send('customRenderMessage', {
     title: data.sender,
     message: data.content,
+    code: data.code,
     type: data.type,
     time: dayjs().format('HH:mm:ss'),
   });
@@ -51,29 +52,29 @@ const imitateRequestData = () => {
 onUnmounted(() => {
   destroySocket(socket);
 });
-
-const text = ref(`
-# Hello There 👋
-I am Kevin Kwok, a full-stack developer🧑‍💻 from China.
-Nice 2 Meet You!
-
-## CODING TEST
-\`\`\` ts
-const debounce = (func: function, delay: number) => {
-\t let timer = null;
-\t return function() {
-\t \t clearTimeout(timer);
-\t \t const args = arguments;
-\t \t timer = setTimeout(function() {
-\t \t func.apply(this, args);
-\t \t }
-\t }
-}
-\`\`\`
-
-## Local Uploading Test
-![Image-1691847397204.gif](http://localhost:3000/uploads/Image-1691847397204.gif)
-`);
+//
+// const text = ref(`
+// # Hello There 👋
+// I am Kevin Kwok, a full-stack developer🧑‍💻 from China.
+// Nice 2 Meet You!
+//
+// ## CODING TEST
+// \`\`\` ts
+// const debounce = (func: function, delay: number) => {
+// \t let timer = null;
+// \t return function() {
+// \t \t clearTimeout(timer);
+// \t \t const args = arguments;
+// \t \t timer = setTimeout(function() {
+// \t \t func.apply(this, args);
+// \t \t }
+// \t }
+// }
+// \`\`\`
+//
+// ## Local Uploading Test
+// ![Image-1691847397204.gif](http://localhost:3000/uploads/Image-1691847397204.gif)
+// `);
 </script>
 
 <template>

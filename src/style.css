@@ -1,4 +1,4 @@
-@import "assets/SF-Pro-SC/font.css";
+@import "assets/JetBrains Mono/font.css";
 @import "assets/font.css";
 
 ::-webkit-scrollbar {
@@ -15,7 +15,7 @@ body {
 
 :root {
   /* fonts */
-  --subheadline-regular: "SF Pro SC", "SF Pro Display", "SF Pro Text";
+  --subheadline-regular: "JetBrains Mono", "-apple-system-", ;
 
   /* font sizes */
   --subheadline-regular-size: 0.69rem;

@@ -7,6 +7,7 @@ interface RenderContent {
   message: string;
   type: string;
   time: string;
+  code: string | number;
 }
 
 function initNotification(): {
@@ -44,7 +45,7 @@ function initNotification(): {
 
     if (VITE_DEV_SERVER_URL) {
       notificationPopup.loadURL(
-        `${VITE_DEV_SERVER_URL}/#/notification?customMessage=${content.message}&customTitle=${content.title}&type=${content.type}&time=${content.time}`,
+        `${VITE_DEV_SERVER_URL}/#/notification?customMessage=${content.message}&customTitle=${content.title}&type=${content.type}&time=${content.time}&code=${content.code}`,
       );
     } else {
       notificationPopup.loadFile(path.join(process.env.DIST, 'index.html'), {
@@ -54,6 +55,7 @@ function initNotification(): {
           customTitle: content.title,
           type: content.type,
           time: content.time,
+          code: content.code,
         },
       });
     }

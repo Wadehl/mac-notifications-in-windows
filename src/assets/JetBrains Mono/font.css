@@ -1,0 +1,8 @@
+@font-face {
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 400;
+    src:
+            local("☺"),
+            url("ttf/JetBrainsMono-Regular.ttf") format("truetype");
+}

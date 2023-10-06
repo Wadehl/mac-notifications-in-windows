@@ -3,6 +3,7 @@
     <div
       v-show="visible"
       class="container"
+      ref="popupContainer"
       @mouseover="clearTimer"
       @mouseleave="closePopup"
     >
@@ -64,7 +65,37 @@
         </div>
         <div class="right-side">
           <div class="timestamp">{{ time }}</div>
-          <!--        <img class="image-icon" alt="" src="/vite.svg"/>-->
+          <a-tooltip content="复制成功" position="top" mini>
+            <div
+              class="image-icon"
+              @click="copy"
+              @mouseover="copy"
+              v-show="type === 'message'"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13 12.4316V7.8125C13 6.2592 14.2592 5 15.8125 5H40.1875C41.7408 5 43 6.2592 43 7.8125V32.1875C43 33.7408 41.7408 35 40.1875 35H35.5163"
+                  stroke="#333"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M32.1875 13H7.8125C6.2592 13 5 14.2592 5 15.8125V40.1875C5 41.7408 6.2592 43 7.8125 43H32.1875C33.7408 43 35 41.7408 35 40.1875V15.8125C35 14.2592 33.7408 13 32.1875 13Z"
+                  fill="none"
+                  stroke="#333"
+                  stroke-width="4"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          </a-tooltip>
         </div>
       </div>
     </div>
@@ -128,6 +159,7 @@ const customTitle = ref('');
 const customMessage = ref('');
 const type = ref('');
 const time = ref('');
+const code = ref('');
 
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
 
@@ -136,6 +168,7 @@ if (VITE_DEV_SERVER_URL) {
   customMessage.value = route.query.customMessage as string;
   type.value = route.query.type as string;
   time.value = route.query.time as string;
+  code.value = route.query.code as string;
 } else {
   // 获取 URL 中的查询参数字符串
   const queryString = window.location.search;
@@ -149,11 +182,12 @@ if (VITE_DEV_SERVER_URL) {
   customMessage.value = query.customMessage as string;
   type.value = query.type as string;
   time.value = query.time as string;
+  code.value = route.query.code as string;
 }
 
 const copy = () => {
   const el = document.createElement('textarea');
-  el.value = customMessage.value;
+  el.value = code.value;
   document.body.appendChild(el);
   el.select();
   document.execCommand('copy');
@@ -198,7 +232,7 @@ const copy = () => {
 .app-icon {
   display: flex;
   flex-direction: column;
-  padding: var(--padding-8xs) 0rem;
+  padding: var(--padding-8xs) 0;
   align-items: flex-start;
   justify-content: flex-start;
 }
@@ -223,7 +257,7 @@ const copy = () => {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
 }
 
 .title-description {
@@ -246,6 +280,12 @@ const copy = () => {
   width: 2rem;
   height: 2rem;
   object-fit: cover;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //color: var(--text-primary);
+  z-index: 9;
 }
 
 .right-side {
@@ -264,9 +304,9 @@ const copy = () => {
   border-radius: var(--br-base);
   background-color: var(--materials-ultrathick);
   box-shadow:
-    0px 0px 1px rgba(255, 255, 255, 0.1) inset,
-    0px 0px 2px rgba(0, 0, 0, 0.25),
-    0px 0px 9px rgba(0, 0, 0, 0.2);
+    0 0 1px rgba(255, 255, 255, 0.1) inset,
+    0 0 2px rgba(0, 0, 0, 0.25),
+    0 0 9px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(30px);
   width: 344px;
   display: flex;
