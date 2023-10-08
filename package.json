@@ -37,7 +37,7 @@
     "@types/fs-extra": "^11.0.1",
     "@types/prismjs": "^1.26.0",
     "@vitejs/plugin-vue": "^4.1.0",
-    "electron": "^24.4.0",
+    "electron": "^24.8.5",
     "electron-builder": "^23.6.0",
     "prettier": "3.0.1",
     "typescript": "^5.0.2",

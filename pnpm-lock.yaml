@@ -86,8 +86,8 @@ devDependencies:
     specifier: ^4.1.0
     version: 4.1.0(vite@4.3.9)(vue@3.2.47)
   electron:
-    specifier: ^24.4.0
-    version: 24.4.0
+    specifier: ^24.8.5
+    version: 24.8.5
   electron-builder:
     specifier: ^23.6.0
     version: 23.6.0
@@ -782,7 +782,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.1
       '@types/keyv': 3.1.4
-      '@types/node': 18.17.1
+      '@types/node': 20.4.5
       '@types/responselike': 1.0.0
     dev: true
 
@@ -857,7 +857,7 @@ packages:
   /@types/keyv@3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 18.17.1
+      '@types/node': 20.4.5
     dev: true
 
   /@types/minimatch@5.1.2:
@@ -895,7 +895,7 @@ packages:
   /@types/responselike@1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 18.17.1
+      '@types/node': 20.4.5
     dev: true
 
   /@types/verror@1.10.6:
@@ -918,7 +918,7 @@ packages:
     resolution: {integrity: sha512-Cn6WYCm0tXv8p6k+A8PvbDG763EDpBoTzHdA+Q/MF6H3sapGjCm9NzoaJncJS9tUKSuCoDs9XHxYYsQDgxR6kw==}
     requiresBuild: true
     dependencies:
-      '@types/node': 18.17.1
+      '@types/node': 20.4.5
     dev: true
     optional: true
 
@@ -2875,8 +2875,8 @@ packages:
     resolution: {integrity: sha512-IXTgg+bITkQv/FLP9FjX6f9KFCs5hQWeh5uNSKxB9mqYj/JXhHDbu+ekS43LVvbkL3eW6/oZy4+r9Om6lan1Uw==}
     dev: false
 
-  /electron@24.4.0:
-    resolution: {integrity: sha512-A9YzLHRUA+HfYVf2daNv0jPXNCWShgcgcTaGntrZRGynQLEhDTbti9Lfmq2tjRKoEgXZ7qj+aJFw+tJZsT/Cfw==}
+  /electron@24.8.5:
+    resolution: {integrity: sha512-CWSF0CrD1XhxyoXUcCcEoJB8orMTHuOrkj2s87XU11vjgVJHhzhCBh9TVqhMQt7U6TtcGYa5kDIiLRekxJRaRA==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
     requiresBuild: true
